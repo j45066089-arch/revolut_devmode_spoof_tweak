@@ -51,6 +51,7 @@ jobs:
           sudo mv theos /usr/local/theos
           sudo mv sdks /usr/local/theos/sdks
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
+          echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
           echo "/usr/local/theos/bin" >> $GITHUB_PATH
 
       - name: Build Tweak
