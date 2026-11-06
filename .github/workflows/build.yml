@@ -55,8 +55,8 @@ jobs:
 
       - name: Build Tweak
         run: |
-          find /usr -name "dm.pl" 2>/dev/null || echo "dm.pl not found anywhere"
-          which dpkg-parsechangelog || echo "dpkg-parsechangelog not found"
+          export PATH="/usr/local/theos/bin:$PATH"
+          which dm.pl
           make package
 
       - name: Upload Package
