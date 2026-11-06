@@ -28,11 +28,25 @@ jobs:
             libffi-dev
 
       - name: Install THEOS
+        uses: actions/checkout@v4
+        with:
+          repository: theos/theos
+          path: theos
+          ref: master
+
+      - name: Install iOS SDK
+        uses: actions/checkout@v4
+        with:
+          repository: theos/sdks
+          path: sdks
+          ref: master
+
+      - name: Setup THEOS
         run: |
-          curl -sL https://raw.githubusercontent.com/theos/theos/master/install-theos.sh | bash
-          echo "THEOS=/home/runner/work/_temp/theos" >> $GITHUB_ENV
-          echo "/home/runner/work/_temp/theos/bin" >> $GITHUB_PATH
-          echo "/home/runner/work/_temp/theos/pkg/theos/scripts" >> $GITHUB_PATH
+          sudo mv theos /usr/local/theos
+          sudo mv sdks /usr/local/theos/sdks
+          echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
+          echo "/usr/local/theos/bin" >> $GITHUB_PATH
 
       - name: Build Tweak
         run: |
