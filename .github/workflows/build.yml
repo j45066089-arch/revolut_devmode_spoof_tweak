@@ -53,8 +53,8 @@ jobs:
           ls -la /usr/local/theos/sdks/
           export THEOS=/usr/local/theos
           /usr/local/theos/bin/update-theos
-          # Install toolchain
-          cd /usr/local/theos/toolchain && make
+          # Install toolchain from GitHub
+          curl -L https://github.com/theos/ios-cctools/releases/download/1169/ios-cctools-1169.tar.gz | sudo tar xz -C /usr/local/theos/toolchain
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
           echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
           echo "/usr/local/theos/bin" >> $GITHUB_PATH
