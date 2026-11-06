@@ -55,8 +55,8 @@ jobs:
 
       - name: Build Tweak
         run: |
-          export PATH="/usr/share/debhelper:$PATH"
-          which dm.pl || ls /usr/share/debhelper/dm.pl || echo "dm.pl not found"
+          find /usr -name "dm.pl" 2>/dev/null || echo "dm.pl not found anywhere"
+          which dpkg-parsechangelog || echo "dpkg-parsechangelog not found"
           make package
 
       - name: Upload Package
