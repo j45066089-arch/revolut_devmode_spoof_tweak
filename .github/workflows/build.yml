@@ -28,11 +28,11 @@ jobs:
             libffi-dev
 
       - name: Install THEOS
-        uses: theos-action/setup-theos@v2
-        with:
-          theos-version: 523e72c
-          sdk-version: "16.0"
-          target: "16.0"
+        run: |
+          curl -sL https://raw.githubusercontent.com/theos/theos/master/install-theos.sh | bash
+          echo "THEOS=/home/runner/work/_temp/theos" >> $GITHUB_ENV
+          echo "/home/runner/work/_temp/theos/bin" >> $GITHUB_PATH
+          echo "/home/runner/work/_temp/theos/pkg/theos/scripts" >> $GITHUB_PATH
 
       - name: Build Tweak
         run: |
