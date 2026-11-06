@@ -1,0 +1,45 @@
+name: Build Tweak
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang \
+            libxml2-dev \
+            libzip-dev \
+            libncurses5-dev \
+            libreadline-dev \
+            libbz2-dev \
+            liblzma-dev \
+            libsqlite3-dev \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libffi-dev
+
+      - name: Install THEOS
+        uses: theos-action/setup-theos@v2
+        with:
+          theos-version: 523e72c
+          sdk-version: "16.0"
+          target: "16.0"
+
+      - name: Build Tweak
+        run: |
+          make package
+
+      - name: Upload Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: RevolutDevModeSpoof
+          path: packages/*.deb
