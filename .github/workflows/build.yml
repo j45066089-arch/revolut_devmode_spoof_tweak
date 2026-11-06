@@ -57,7 +57,9 @@ jobs:
         run: |
           export PATH="/usr/local/theos/bin:$PATH"
           which dm.pl
-          make package
+          which make
+          make package VERBOSE=1 2>&1 | tee build.log
+          cat build.log
 
       - name: Upload Package
         uses: actions/upload-artifact@v4
