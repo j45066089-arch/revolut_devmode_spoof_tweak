@@ -54,9 +54,8 @@ jobs:
 
       - name: Build Tweak
         run: |
-          which dm.pl || echo "dm.pl not found"
-          dpkg -L devscripts | grep dm.pl || echo "not in devscripts"
-          dpkg -L debmake | grep dm.pl || echo "not in debmake"
+          export PATH="/usr/share/debhelper:$PATH"
+          which dm.pl || ls /usr/share/debhelper/dm.pl || echo "dm.pl not found"
           make package
 
       - name: Upload Package
