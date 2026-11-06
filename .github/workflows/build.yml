@@ -51,6 +51,7 @@ jobs:
           sudo mv theos /usr/local/theos
           sudo cp -r sdks/* /usr/local/theos/sdks/
           ls -la /usr/local/theos/sdks/
+          export THEOS=/usr/local/theos
           /usr/local/theos/bin/update-theos
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
           echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
