@@ -33,7 +33,7 @@ jobs:
             dctrl-tools
 
       - name: Install THEOS
-        uses: theos/action-setup-theos@v2
+        uses: theos-action/setup-theos@v2
         with:
           theos-version: 523e72c
           sdk-version: "15.6"
