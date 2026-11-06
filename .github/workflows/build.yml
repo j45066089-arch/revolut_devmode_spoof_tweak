@@ -29,7 +29,8 @@ jobs:
             perl \
             devscripts \
             dpkg-dev \
-            debmake
+            debmake \
+            dctrl-tools
 
       - name: Install THEOS
         uses: actions/checkout@v4
