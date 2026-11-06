@@ -33,31 +33,10 @@ jobs:
             dctrl-tools
 
       - name: Install THEOS
-        uses: actions/checkout@v4
+        uses: theos/action-setup-theos@v2
         with:
-          repository: theos/theos
-          path: theos
-          ref: master
-
-      - name: Install iOS SDK
-        uses: actions/checkout@v4
-        with:
-          repository: theos/sdks
-          path: sdks
-          ref: master
-
-      - name: Setup THEOS
-        run: |
-          sudo mv theos /usr/local/theos
-          sudo cp -r sdks/* /usr/local/theos/sdks/
-          ls -la /usr/local/theos/sdks/
-          export THEOS=/usr/local/theos
-          /usr/local/theos/bin/update-theos
-          # Install toolchain from GitHub
-          curl -L https://github.com/theos/ios-cctools/releases/download/1169/ios-cctools-1169.tar.gz | sudo tar xz -C /usr/local/theos/toolchain
-          echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
-          echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
-          echo "/usr/local/theos/bin" >> $GITHUB_PATH
+          theos-version: 523e72c
+          sdk-version: "15.6"
 
       - name: Build Tweak
         run: |
