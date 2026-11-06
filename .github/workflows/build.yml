@@ -55,14 +55,15 @@ jobs:
 
       - name: Build Tweak
         run: |
+          set -x
           export PATH="/usr/local/theos/bin:$PATH"
-          which dm.pl
+          echo "THEOS=$THEOS"
+          echo "THEOS_MAKE_PATH=$THEOS_MAKE_PATH"
+          ls -la /usr/local/theos/
+          ls -la /usr/local/theos/makefiles/
           which make
-          echo "Starting make..."
           make
-          echo "Make done, now packaging..."
           make package
-          echo "Package done!"
           ls -la packages/
 
       - name: Upload Package
