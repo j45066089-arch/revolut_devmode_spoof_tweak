@@ -1,4 +1,4 @@
-TARGET := iphone:clang:16.4
+TARGET := iphone:clang:15.6
 ARCHS := arm64 arm64e
 
 TWEAK_NAME = RevolutDevModeSpoof
