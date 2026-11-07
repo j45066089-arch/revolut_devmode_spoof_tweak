@@ -51,14 +51,9 @@ jobs:
           sudo -S -p '' cp -r sdks/* /usr/local/theos/sdks/
           export THEOS=/usr/local/theos
           /usr/local/theos/bin/update-theos
-          # Download ios-cctools from dhowe
-          curl -L https://github.com/dhowe/ios-cctools/archive/refs/heads/master.zip -o ios-cctools.zip
-          unzip ios-cctools.zip
-          cd ios-cctools-master
-          make
-          sudo -S -p '' make install
-          sudo -S -p '' mv /usr/local/bin/* /usr/local/theos/toolchain/bin/ 2>/dev/null || true
-          sudo -S -p '' mv /usr/local/lib/* /usr/local/theos/toolchain/lib/ 2>/dev/null || true
+          # Clone toolchain repo with GitHub token
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/theos/toolchain.git /tmp/toolchain
+          sudo -S -p '' cp -r /tmp/toolchain/* /usr/local/theos/toolchain/
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
           echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
           echo "/usr/local/theos/bin" >> $GITHUB_PATH
