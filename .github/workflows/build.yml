@@ -45,19 +45,15 @@ jobs:
           path: sdks
           ref: master
 
-      - name: Install Toolchain
-        uses: actions/checkout@v4
-        with:
-          repository: theos/toolchain
-          path: theos/toolchain
-          ref: master
-
       - name: Setup THEOS
         run: |
           sudo -S -p '' mv theos /usr/local/theos
           sudo -S -p '' cp -r sdks/* /usr/local/theos/sdks/
           export THEOS=/usr/local/theos
           /usr/local/theos/bin/update-theos
+          # Add toolchain submodule
+          cd /usr/local/theos
+          git submodule add https://github.com/theos/toolchain.git toolchain
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
           echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
           echo "/usr/local/theos/bin" >> $GITHUB_PATH
