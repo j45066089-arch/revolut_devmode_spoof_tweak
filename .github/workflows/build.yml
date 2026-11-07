@@ -31,32 +31,11 @@ jobs:
             dpkg-dev \
             dctrl-tools
 
-      - name: Install THEOS
-        uses: actions/checkout@v4
-        with:
-          repository: theos/theos
-          path: theos
-          ref: master
-
-      - name: Install iOS SDK
-        uses: actions/checkout@v4
-        with:
-          repository: theos/sdks
-          path: sdks
-          ref: master
-
       - name: Setup THEOS
-        run: |
-          sudo -S -p '' mv theos /usr/local/theos
-          sudo -S -p '' cp -r sdks/* /usr/local/theos/sdks/
-          export THEOS=/usr/local/theos
-          /usr/local/theos/bin/update-theos
-          # Clone toolchain repo with GitHub token
-          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/theos/toolchain.git /tmp/toolchain
-          sudo -S -p '' cp -r /tmp/toolchain/* /usr/local/theos/toolchain/
-          echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
-          echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
-          echo "/usr/local/theos/bin" >> $GITHUB_PATH
+        uses: imk-pat/setup-theos@v3
+        with:
+          theos-version: master
+          sdk-version: 15.6
 
       - name: Build Tweak
         run: |
