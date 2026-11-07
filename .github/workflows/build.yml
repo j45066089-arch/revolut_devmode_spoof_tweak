@@ -53,6 +53,7 @@ jobs:
           /usr/local/theos/bin/update-theos
           # Add toolchain submodule
           cd /usr/local/theos
+          rm -rf toolchain
           git submodule add https://github.com/theos/toolchain.git toolchain
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
           echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
