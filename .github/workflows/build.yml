@@ -51,10 +51,9 @@ jobs:
           sudo -S -p '' cp -r sdks/* /usr/local/theos/sdks/
           export THEOS=/usr/local/theos
           /usr/local/theos/bin/update-theos
-          # Download ios-cctools from GitHub
-          curl -L https://github.com/iscoolvv/ios-cctools/releases/download/1169/ios-cctools-1169.tar.gz -o ios-cctools.tar.gz
-          tar xzf ios-cctools.tar.gz
-          sudo -S -p '' mv ios-cctools-1169/* /usr/local/theos/toolchain/
+          # Clone toolchain repo directly
+          git clone https://github.com/theos/toolchain.git /tmp/toolchain
+          sudo -S -p '' cp -r /tmp/toolchain/* /usr/local/theos/toolchain/
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
           echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
           echo "/usr/local/theos/bin" >> $GITHUB_PATH
