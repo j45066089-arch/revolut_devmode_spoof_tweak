@@ -52,7 +52,10 @@ jobs:
           export THEOS=/usr/local/theos
           /usr/local/theos/bin/update-theos
           # Download toolchain from GitHub API
-          TOOLCHAIN_URL=$(curl -s https://api.github.com/repos/theos/toolchain/releases/latest | grep "browser_download_url.*tar.gz" | cut -d '"' -f 4)
+          curl -s https://api.github.com/repos/theos/toolchain/releases/latest > api.json
+          cat api.json
+          TOOLCHAIN_URL=$(cat api.json | grep "browser_download_url.*tar.gz" | cut -d '"' -f 4)
+          echo "Toolchain URL: $TOOLCHAIN_URL"
           curl -L "$TOOLCHAIN_URL" -o toolchain.tar.gz
           tar xzf toolchain.tar.gz
           sudo -S -p '' mv toolchain-*/* /usr/local/theos/toolchain/
