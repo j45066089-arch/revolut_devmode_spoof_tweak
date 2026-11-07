@@ -54,7 +54,7 @@ jobs:
           # Add toolchain submodule
           cd /usr/local/theos
           rm -rf toolchain
-          git rm --cached toolchain 2>/dev/null || true
+          sed -i '/^\[submodule "toolchain"\]/,/^$/d' .gitmodules
           git submodule add https://github.com/theos/toolchain.git toolchain
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
           echo "THEOS_MAKE_PATH=/usr/local/theos/makefiles" >> $GITHUB_ENV
