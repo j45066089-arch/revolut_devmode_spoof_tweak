@@ -37,13 +37,19 @@ jobs:
           repository: theos/theos
           path: theos
           ref: master
-          submodules: recursive
 
       - name: Install iOS SDK
         uses: actions/checkout@v4
         with:
           repository: theos/sdks
           path: sdks
+          ref: master
+
+      - name: Install Toolchain
+        uses: actions/checkout@v4
+        with:
+          repository: theos/toolchain
+          path: theos/toolchain
           ref: master
 
       - name: Setup THEOS
