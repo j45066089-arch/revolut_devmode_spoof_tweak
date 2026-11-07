@@ -37,7 +37,6 @@ jobs:
           repository: theos/theos
           path: theos
           ref: master
-          submodules: recursive
 
       - name: Install iOS SDK
         uses: actions/checkout@v4
@@ -46,10 +45,18 @@ jobs:
           path: sdks
           ref: master
 
+      - name: Install Toolchain
+        uses: actions/checkout@v4
+        with:
+          repository: theos/toolchain
+          path: toolchain
+          ref: master
+
       - name: Setup THEOS
         run: |
           sudo -S -p '' mv theos /usr/local/theos
           sudo -S -p '' cp -r sdks/* /usr/local/theos/sdks/
+          sudo -S -p '' mv toolchain /usr/local/theos/toolchain
           export THEOS=/usr/local/theos
           cd /usr/local/theos/toolchain
           make
