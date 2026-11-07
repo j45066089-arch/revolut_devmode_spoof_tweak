@@ -54,6 +54,7 @@ jobs:
           # Add toolchain submodule
           cd /usr/local/theos
           rm -rf toolchain
+          git ls-files --stage | grep toolchain
           git update-index --remove toolchain
           git submodule add https://github.com/theos/toolchain.git toolchain
           echo "THEOS=/usr/local/theos" >> $GITHUB_ENV
