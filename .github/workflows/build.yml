@@ -32,7 +32,7 @@ jobs:
             dctrl-tools
 
       - name: Setup THEOS and iOS SDK
-        uses: qiaojiajun/setup-theos@main
+        uses: theos-actions/setup@v2
         with:
           theos-version: master
           sdk-version: 15.6
